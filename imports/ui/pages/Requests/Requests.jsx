@@ -3,7 +3,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 
 import { Meteor } from 'meteor/meteor';
 
-import { Modal, Button, message, Descriptions, Result, Skeleton, Space, Upload, Input, notification } from 'antd';
+import { Modal, Button, message, Descriptions, Result, Skeleton, } from 'antd';
 
 import { PlusCircleOutlined, SmileOutlined } from '@ant-design/icons';
 
@@ -107,7 +107,6 @@ export const Requests = () => {
     // Función para para realizar el envio de los datos
     // sendRequest(values.leader, values.requestType, values.subject, values.content, values.files).then(res => {
     sendRequest(data).then(res => {
-
       messageApi.open({
         type: 'success',
         content: 'Se envió la solicitud correctamente',
@@ -135,7 +134,11 @@ export const Requests = () => {
 
     //Función para consultar la solicitud
     consultRequestById(_id).then(res => {
-
+      if (!res) {
+        setRequest(null);
+        setRequestLoading(false);
+        return;
+      }
       setRequest(res); //Se almacena la respuesta
       setRequestLoading(false); // Se almacena un valor "false" como estado "No cargando"
     })

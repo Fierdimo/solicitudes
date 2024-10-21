@@ -69,8 +69,7 @@ export const HeaderP = ({ children }, prompt) => {
         key: '1',
         label: (
           <>
-
-            <Divider><span style={{ color: "", }}>{user.profile.membreship[0].map(i => `${i} `)}</span></Divider>
+            <Divider><span style={{ color: "", }}>{user?.profile?.membreship[0]?.map(i => `${i} `)}</span></Divider>
           </>
         ),
       }, {

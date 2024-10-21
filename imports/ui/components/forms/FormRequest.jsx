@@ -49,8 +49,6 @@ export const FormRequest = ({ onFinish }) => {
     if (selecttedRequestType.value === 0) message = "Por favor seleccione el tipo de solicitud";
     if (!values.subject) message = "Por favor ingrese el asunto";
 
-
-
     //if (!values.receiver) message = "Por favor ingrese un destinatario";
 
     /* Condiconal para manejar el mensaje segun el texto asignado */
@@ -65,7 +63,7 @@ export const FormRequest = ({ onFinish }) => {
     if (Meteor.user().profile.membreship.length === 1) {
       values.leader = Meteor.user().profile.membreship[0];
     } else {
-      values.leader = Meteor.user().profile.membreship[values.leader];
+      values.leader = Meteor.user().profile.membreship[values.leader - 1];
     }
 
     values["requestType"] = selecttedRequestType.value;
@@ -148,7 +146,7 @@ export const FormRequest = ({ onFinish }) => {
             <Form.Item name={'leader'} label="Seleccionar" style={{ marginTop: "20px", maxWidth: "300px" }}>
               <Select placeholder={'Lider destinatario'} style={{ minWidth: "200px" }}>
                 {Meteor.user().profile.membreship.map((item, i) => (
-                  <Select.Option value={i}>{`Lider ${item[1]}`}</Select.Option>
+                  <Select.Option value={i + 1}>{`Lider ${item[1]} ${i}`}</Select.Option>
                 ))}
               </Select>
             </Form.Item>

@@ -46,7 +46,9 @@ export function uploadFile(fileData) {
     });
 
     upload.on("end", (error, fileObj) => {
-      if (error) reject(error);
+      if (error) {
+        reject(error)
+      }
       else {
         fileObj['fileId'] = upload.config.fileId
         console.log("archivo cargado...");

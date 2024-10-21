@@ -37,10 +37,6 @@ export const sendRequest = async (
       // `filesId` se llenará con los IDs de los archivos una vez que todas las promesas se resuelvan
       const resultFilesId = await Promise.all(uploadPromises);
 
-      if(filesId.length !== resultFilesId.length) {
-        reject("Error in upload files");
-      }
-
       filesId = resultFilesId.map(f => {
         return {
           _id: f.fileId,
@@ -49,6 +45,10 @@ export const sendRequest = async (
           size: f.size
         }
       }) // Añade todos los IDs de archivos subidos a `filesId`
+
+      if (filesId.length !== resultFilesId.length) {
+        reject("Error in upload files");
+      }
     }
 
     Meteor.call("requests.sendRequests",
